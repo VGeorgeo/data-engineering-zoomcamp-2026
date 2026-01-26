@@ -27,3 +27,28 @@ pip -V # pip 25.3 from /usr/local/lib/python3.13/site-packages/pip (python 3.13)
 
 docker build -t test:pandas .
 ```
+
+### Simple Dockerfile with pip
+```
+# base Docker image that we will build on
+FROM python:3.13.11-slim
+
+# set up our image by installing prerequisites; pandas in this case
+RUN pip install pandas pyarrow
+
+# set up the working directory inside the container
+WORKDIR /app
+# copy the script to the container. 1st name is source file, 2nd is destination
+COPY pipeline.py pipeline.py
+
+# define what to do first when the container runs
+# in this example, we will just run the script
+ENTRYPOINT ["python", "pipeline.py"]
+```
+#### Explanation:
+
+- FROM: Base image (Python 3.13)
+- RUN: Execute commands during build
+- WORKDIR: Set working directory
+- COPY: Copy files into the image
+- ENTRYPOINT: Default command to run

@@ -16,4 +16,8 @@ Docker Official Images - a curated set of Docker repositories, serve as the star
 
 **Docker Compose** - tool that allow to use multiple docker run commands to start multiple containers simultaniously. With Docker Compose, you can define all of your containers and their configurations in a single YAML file. If you include this file in your code repository, anyone that clones your repository can get up and running with a single command.
 
-**Dockerfile versus Compose file** - Dockerfile provides instructions to build a container image while a Compose file defines your running containers. Quite often, a Compose file references a Dockerfile to build an image to use for a particular service.
+**Dockerfile versus Compose File** - Dockerfile provides instructions to build a container image while a Compose file defines your running containers. Quite often, a Compose file references a Dockerfile to build an image to use for a particular service.
+
+
+## Building Images
+*Container Images* are composed of layers. And each of these layers, once created, are immutable. 

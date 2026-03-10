@@ -41,10 +41,14 @@ Some of the most common instructions in a Dockerfile include:
 ### Build, tag, and publish an image
 
 - ```docker build .``` - The final . in the command provides the path or URL to the build context. At this location, the builder will find the Dockerfile and other referenced files.
-- ```[HOST[:PORT_NUMBER]/]PATH[:TAG] | docker image tag my-username/my-image another-username/another-image:v1``` - tagging images
+- ```[HOST[:PORT_NUMBER]/]PATH[:TAG] | docker build -t my-username/my-image . | docker image tag my-username/my-image another-username/another-image:v1``` - tagging images (-t or --tag)
+- ```docker image ls``` - view the images
+- ```docker push <name>``` - Push the image
+- ```docker image history <name>``` - View the history (or how the image was created) 
 
-docker image ls
-docker push <name>
+### Multi-stage builds
+
+Multi-stage builds introduce multiple stages in your Dockerfile, each with a specific purpose. Think of it like the ability to run different parts of a build in multiple different environments, concurrently. By separating the build environment from the final runtime environment, you can significantly reduce the image size and attack surface. This is especially beneficial for applications with large build dependencies.
 
 
 

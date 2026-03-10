@@ -38,5 +38,16 @@ Some of the most common instructions in a Dockerfile include:
 **Containerize new projects quickly with docker init** - The docker init command will analyze your project and quickly create a Dockerfile, a compose.yaml, and a .dockerignore, helping you get up and going. Since you're learning about Dockerfiles specifically here, you won't use it now.
 
 
+### Build, tag, and publish an image
+
+- ```docker build .``` - The final . in the command provides the path or URL to the build context. At this location, the builder will find the Dockerfile and other referenced files.
+- ```[HOST[:PORT_NUMBER]/]PATH[:TAG] | docker image tag my-username/my-image another-username/another-image:v1``` - tagging images
+
+docker image ls
+docker push <name>
+
+
+
+
 
 

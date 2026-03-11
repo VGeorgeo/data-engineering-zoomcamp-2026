@@ -51,7 +51,31 @@ Some of the most common instructions in a Dockerfile include:
 Multi-stage builds introduce multiple stages in your Dockerfile, each with a specific purpose. Think of it like the ability to run different parts of a build in multiple different environments, concurrently. By separating the build environment from the final runtime environment, you can significantly reduce the image size and attack surface. This is especially beneficial for applications with large build dependencies.
 
 
+## Running Containers
 
+```docker run -d -p HOST_PORT:CONTAINER_PORT nginx | docker run -d -p 8080:80 nginx``` - Publishing a port provides the ability to break through a networking isolation by setting up a forwarding rule. As an example, you can indicate that requests on your host’s port 8080 should be forwarded to the container’s port 80
+
+**The .env file** acts as a convenient way to set environment variables for your Docker containers without cluttering your command line with numerous -e flags. To use a .env file, you can pass --env-file option with the docker run command.
+
+- ```HOSTNAME=2042f2e6ebe4```
+- ```foo=bar``` -  sets an environment variable foo inside the container with the value bar
+- ```docker run -e POSTGRES_PASSWORD=secret --memory="512m" --cpus="0.5" postgres``` - use the --memory and --cpus flags with the docker run command to restrict how much CPU and memory a container can use
+
+### Container Volumes
+Volumes are a storage mechanism that provide the ability to persist data beyond the lifecycle of an individual container. Think of it like providing a shortcut or symlink from inside the container to outside the container.
+
+```docker volume create log-data```
+
+```docker run -d -p 80:80 -v log-data:/logs docker/welcome-to-docker``` - When starting a container with the following command, the volume will be mounted (or attached) into the container at /logs. If the volume log-data doesn't exist, Docker will automatically create it for you.
+
+The following commands will be helpful to manage volumes:
+- ```docker volume ls``` - list all volumes
+- ```docker volume rm <volume-name-or-id>``` - remove a volume (only works when the volume is not attached to any containers)
+- ```docker volume prune``` - remove all unused (unattached) volumes
+
+### Sharing files between a host and container
+- If you want to ensure that data generated or modified inside the container persists even after the container stops running, you would opt for a ***volume***.
+- If you have specific files or directories on your host system that you want to directly share with your container, like configuration files or development code, then you would use a ***bind mount***. It's like opening a direct portal between your host and container for sharing. ***Bind mounts are ideal for development environments where real-time file access and sharing between the host and container are crucial.***
 
 
 
